@@ -1,29 +1,29 @@
 const main = async () => {
     const [owner, randomPerson] = await hre.ethers.getSigners();
-    const waveContractFactory = await hre.ethers.getContractFactory("WavePortal");
-    const waveContract = await waveContractFactory.deploy();
-    await waveContract.deployed();
+    const chickenFarmFactory = await hre.ethers.getContractFactory("ChickenFarm");
+    const chickenFarm = await chickenFarmFactory.deploy();
+    await chickenFarm.deployed();
 
-    console.log("Contract deployed to: ", waveContract.address);
+    console.log("Contract deployed to: ", chickenFarm.address);
     console.log("Contract deployed by: ", owner.address);
 
-    let waveCount;
-    waveCount = await waveContract.getTotalWaves(); 
+    let hatchCount;
+    hatchCount = await chickenFarm.getChickenCount(); 
 
-    let waveTxn = await waveContract.wave();
-    await waveTxn.wait();
+    let hatchTxn = await chickenFarm.hatch();
+    await hatchTxn.wait();
 
-    waveCount = await waveContract.getTotalWaves();
+    hatchCount = await chickenFarm.getChickenCount();
 
-    waveTxn = await waveContract.connect(randomPerson).wave();
-    await waveTxn.wait();
+    hatchTxn = await chickenFarm.connect(randomPerson).hatch();
+    await hatchTxn.wait();
 
-    waveCount = await waveContract.getTotalWaves();
+    hatchCount = await chickenFarm.getChickenCount();
 
-    waveTxn = await waveContract.connect(randomPerson).wave();
-    await waveTxn.wait();
+    hatchTxn = await chickenFarm.connect(randomPerson).hatch();
+    await hatchTxn.wait();
 
-    waveCount = await waveContract.getTotalWaves();
+    hatchCount = await chickenFarm.getChickenCount();
 
     
 };
